@@ -1,0 +1,40 @@
+<%- include('../partials/header',{user:user}) %>
+
+
+    <body>
+        <%-include('../partials/navigation')%>
+
+            <main>
+
+                <div class="container">
+                    <%if(errorMsg){%>
+                            <h1><%=errorMsg%></h1>
+                        <%}%>
+                    <%if(cafes.length> 0){%>
+                        <div class="wrapper">
+                            <%cafes.forEach(cafe=>{%>
+
+                                <div class="cafe">
+                                    <form action="/admin/cafe/<%-cafe.id%>" method="post">
+                                        <p>cafe's name: <%-cafe.title%></p>
+                                        <p>cafe's location: <%-cafe.location%></p>
+                                        <p>cafe's city: <%-cafe.city%></p>
+                                        <p>cafe's opening hours: <%-cafe.openingHours%></p>
+                                        <img class="cafe__img" src="<%-cafe.imageUrl%>" alt="">
+                                        <button type="submit">approve</button>
+                                        <input type="hidden" name="_csrf" value="<%-ss%>">
+                                    </form>
+                                    <form action="/admin/cafe/delete/<%-cafe.id%>" method="post">
+<input type="hidden" name="_csrf" value="<%-ss%>">
+                                        <button type="submit">reject</button>
+                                    </form>
+                                </div>
+                                <%})%>
+                        </div>
+                        <%}%>
+                </div>
+            </main>
+
+    </body>
+
+    <%-include('../partials/footer')%>

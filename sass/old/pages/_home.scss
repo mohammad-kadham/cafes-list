@@ -1,0 +1,12 @@
+@use '../abstracts/variables' as *;
+
+// Pages - home
+.hero {
+  padding: 4rem 1rem;
+  text-align: center;
+
+  &__title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    color: $primary-color;
+  }
+}

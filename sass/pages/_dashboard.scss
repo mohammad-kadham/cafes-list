@@ -1,0 +1,109 @@
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Pages — admin dashboard
+.dashboard {
+  width: min(92%, $container-width);
+  margin: 2.5rem auto;
+
+  &__title {
+    margin-bottom: 0.3rem;
+  }
+
+  &__subtitle {
+    color: $ink-soft;
+    margin-bottom: 2rem;
+  }
+
+  &__empty {
+    @include paper-panel;
+    padding: 3rem 2rem;
+    text-align: center;
+    color: $ink-soft;
+    font-family: $font-mono;
+    font-size: 0.9rem;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cafe {
+  @include paper-panel;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1rem 1.3rem;
+  box-shadow: $shadow-sm;
+
+  &__img {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: $radius-sm;
+    flex: none;
+    background: $paper-dark;
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.2rem;
+  }
+
+  &__meta {
+    font-family: $font-mono;
+    font-size: 0.78rem;
+    color: $ink-soft;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.6rem;
+    flex: none;
+  }
+
+  &__approve,
+  &__reject {
+    @include btn-base;
+    padding: 0.6rem 1.1rem;
+    font-size: 0.72rem;
+  }
+
+  &__approve {
+    background: $success;
+
+    &:hover {
+      background: color.adjust($success, $lightness: -8%);
+    }
+  }
+
+  &__reject {
+    @include btn-danger;
+    padding: 0.6rem 1.1rem;
+    font-size: 0.72rem;
+  }
+}
+
+@include below(600px) {
+  .cafe {
+    flex-wrap: wrap;
+
+    &__actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+}

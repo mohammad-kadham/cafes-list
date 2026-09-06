@@ -1,0 +1,96 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Components — rating strip
+// Each row represents one metric (wifi, outlets, seats, service, noise, price).
+// Color runs red -> green based on the score, driven by a --val custom
+// property (0–5) set inline per row, e.g. style="--val: 4.2"
+.rating-strip {
+  @include paper-panel;
+  padding: 1.5rem 1.8rem;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px dotted $line;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__label {
+    @include focus-ring;
+    font-family: $font-mono;
+    font-size: 0.85rem;
+    color: $ink-soft;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    min-width: 120px;
+  }
+
+  &__bar {
+    flex: 1;
+    height: 10px;
+    border-radius: 999px;
+    background: $paper-dark;
+    overflow: hidden;
+    position: relative;
+  }
+
+  // the filled portion — width and color both driven by --val
+  &__fill {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    width: calc(var(--val, 0) / 5 * 100%);
+    background: hsl(calc(var(--val, 0) / 5 * 120), 60%, 34%);
+    transition: width $transition, background $transition;
+  }
+
+  &__value {
+    font-family: $font-mono;
+    font-weight: 600;
+    font-size: 0.85rem;
+    min-width: 3.2rem;
+    text-align: right;
+    color: hsl(calc(var(--val, 0) / 5 * 120), 65%, 30%);
+  }
+
+  // fallback styling if a native <progress> element is used instead
+  progress {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    background-color: $paper-dark;
+    overflow: hidden;
+
+    &::-webkit-progress-bar {
+      background-color: $paper-dark;
+      border-radius: 999px;
+    }
+
+    &::-webkit-progress-value {
+      background-color: $ochre;
+      border-radius: 999px;
+      transition: width $transition;
+    }
+
+    &::-moz-progress-bar {
+      background-color: $ochre;
+      border-radius: 999px;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rating-strip__fill {
+    transition: none;
+  }
+}

@@ -1,0 +1,15 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.container {
+  width: min(92%, $container-width);
+  margin: 2.5rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  justify-content: flex-start;
+
+  @include below(720px) {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,42 @@
+<%-include(".. /partials/header")%>
+
+    <body>
+        <form class="form" action="/cafes/add" method="post" enctype="multipart/form-data">
+            <%if(err){%>
+                <h1><%-err%></h1>
+                <%}%>
+                    <div class="form__form-group">
+                        <input class="form__input" type="text" name="title" placeholder="cafe's name ">
+                        <label class="form__label" for="">title</label>
+
+                    </div>
+
+                    <div class="form__form-group">
+
+                        <input class="form__input" type="text" name="location">
+                        <label class="form__label" for="">location</label>
+                    </div>
+                    <div class="form__form-group">
+
+                        <input class="form__input" type="text" name="city">
+                        <label class="form__label" for="">city</label>
+                    </div>
+                    <div class="form__form-group">
+                        <input class="form__input" type="text" name="openingHours" placeholder="e.g. 08:00 - 20:00">
+                        <label class="form__label" for="">opening Hours</label>
+                    </div>
+
+
+                    <input type="hidden" name="_csrf" value=<%=ss%>>
+                    <div class="form__form-group">
+                        <input type="file" name="image" id="">
+                        <label class="form__label" for="">cafe's picture</label>
+                    </div>
+                    <div class="form__form-group">
+
+                        <button class="form__btn" type="submit">submit</button>
+                    </div>
+        </form>
+    </body>
+
+    </html>

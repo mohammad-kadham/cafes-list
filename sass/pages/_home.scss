@@ -1,0 +1,50 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Pages — home
+.hero {
+  padding: 4rem 1rem 2rem;
+  text-align: center;
+
+  &__title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    color: $ink;
+  }
+
+  &__subtitle {
+    color: $ink-soft;
+    max-width: 46ch;
+    margin: 0 auto;
+  }
+}
+
+.sort-form {
+  @include paper-panel;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem 1.5rem;
+  width: min(92%, $container-width);
+  margin: 0 auto;
+  font-family: $font-mono;
+  font-size: 0.85rem;
+
+  label {
+    color: $ink-soft;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  select {
+    border: 1px solid $line;
+    border-radius: $radius-sm;
+    padding: 0.5rem 0.8rem;
+    background: $paper;
+    color: $ink;
+    font-family: $font-mono;
+    font-size: 0.85rem;
+    @include focus-ring;
+  }
+}

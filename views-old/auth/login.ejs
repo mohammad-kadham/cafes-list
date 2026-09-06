@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%if(err){%>
+<h1><%=err%></h1>
+        <%}%>
+    <form action="/login" method="post">
+        <input type="text" name="email">
+        <label for="">email</label>
+        <hr>
+        <input type="text" name="password">
+        <label for="">password</label>
+        <button type="submit">login</button>
+        <input type="hidden" name="_csrf" value=<%=ss%>>
+    </form>
+    <div><a href="/signup" class="btn">sginup </a></div>
+</body>
+</html>

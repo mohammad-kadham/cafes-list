@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Rate <%= cafe.title %></title>
+</head>
+<body>
+    <div class="page">
+        <a href="/" class="back">&larr; Back to all cafes</a>
+
+        <div class="form-page">
+            <form class="form" method="POST" action="/rate">
+                <h1 class="form__title">Rate <%= cafe.title %></h1>
+
+                <div class="form__form-group">
+                    <label class="form__label" for="wifi">wifi speed</label>
+                    <select class="form__input" name="wifi" id="wifi" required>
+                        <option value="1">bad</option>
+                        <option value="2">okay</option>
+                        <option value="3">good</option>
+                    </select>
+                </div>
+
+                <div class="form__form-group">
+                    <label class="form__label" for="outlet">outlet availability</label>
+                    <select class="form__input" name="outlet" id="outlet" required>
+                        <option value="1">low</option>
+                        <option value="2">mid</option>
+                        <option value="3">high</option>
+                    </select>
+                </div>
+
+                <div class="form__form-group">
+                    <label class="form__label" for="seat">seat comfort</label>
+                    <select class="form__input" name="seat" id="seat" required>
+                        <option value="1">bad</option>
+                        <option value="2">mid</option>
+                        <option value="3">comfy</option>
+                    </select>
+                </div>
+
+                <div class="form__form-group">
+                    <label class="form__label" for="service">service</label>
+                    <select class="form__input" name="service" id="service" required>
+                        <option value="1">bad</option>
+                        <option value="2">mid</option>
+                        <option value="3">good</option>
+                    </select>
+                </div>
+
+                <div class="form__form-group">
+                    <label class="form__label" for="noise">noise level</label>
+                    <select class="form__input" name="noise" id="noise" required>
+                        <option value="1">high</option>
+                        <option value="2">mid</option>
+                        <option value="3">low</option>
+                    </select>
+                </div>
+
+                <div class="form__form-group">
+                    <label class="form__label" for="price">prices</label>
+                    <select class="form__input" name="price" id="price" required>
+                        <option value="1">expensive</option>
+                        <option value="2">normal</option>
+                        <option value="3">cheap</option>
+                    </select>
+                </div>
+
+                <input type="hidden" name="cafe_id" value="<%-cafe.id%>">
+                <input type="hidden" name="_csrf" value="<%=ss%>">
+
+                <div class="form__form-group">
+                    <button class="form__btn" type="submit">Submit Rating</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

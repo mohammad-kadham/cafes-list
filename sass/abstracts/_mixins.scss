@@ -1,0 +1,133 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+// Base button — used by .btn and reused directly by add-page/dashboard
+// buttons via @include, avoiding cross-file @extend (which Sass modules
+// don't support unless the defining file is @use'd first).
+@mixin btn-base {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: $font-mono;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.6rem;
+  border: none;
+  border-radius: $radius-sm;
+  background: $ink;
+  color: $paper-card;
+  transition: background $transition-fast, transform $transition-fast;
+  @include focus-ring;
+
+  &:hover {
+    background: $stamp;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+@mixin btn-secondary {
+  @include btn-base;
+  background: transparent;
+  color: $ink;
+  border: 1.5px solid $ink;
+
+  &:hover {
+    background: $ink;
+    color: $paper-card;
+  }
+}
+
+@mixin btn-danger {
+  @include btn-base;
+  background: $danger;
+
+  &:hover {
+    background: color.adjust($danger, $lightness: -8%);
+  }
+}
+
+@mixin btn-ghost {
+  @include btn-base;
+  background: transparent;
+  color: $ink-soft;
+  padding: 0.6rem 1rem;
+
+  &:hover {
+    background: $paper-dark;
+    color: $ink;
+  }
+}
+
+// Accessible focus ring — used on every interactive element site-wide
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid $stamp;
+    outline-offset: 3px;
+    border-radius: $radius-sm;
+  }
+}
+
+// The rotated ink-stamp badge (used on cafe cards + detail page)
+@mixin ink-stamp($size: 72px) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  border: 2px solid $stamp;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-9deg);
+  color: $stamp;
+  mix-blend-mode: multiply;
+  opacity: 0.92;
+  position: relative;
+  flex: none;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 1px solid $stamp;
+    border-radius: 50%;
+  }
+}
+
+// Monospace "receipt row" — label, dotted leader, value
+@mixin receipt-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 9px 0;
+  border-bottom: 1px dotted $line;
+  font-family: $font-mono;
+  font-size: 13.5px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+// Card surface — reused for cafe cards, form panels, dashboard rows
+@mixin paper-panel {
+  background: $paper-card;
+  border: 1px solid $line;
+  border-radius: $radius;
+}
+
+// Responsive breakpoint helper
+@mixin below($width) {
+  @media (max-width: $width) {
+    @content;
+  }
+}

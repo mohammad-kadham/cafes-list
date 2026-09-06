@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Log In</title>
+</head>
+<body>
+    <div class="form-page">
+        <form class="form" action="/login" method="post">
+            <h1 class="form__title">Log In</h1>
+
+            <% if (err) { %>
+                <div class="form__error"><%=err%></div>
+            <% } %>
+
+            <div class="form__form-group">
+                <input class="form__input" type="text" name="email" placeholder="you@example.com">
+                <label class="form__label" for="">email</label>
+            </div>
+
+            <div class="form__form-group">
+                <input class="form__input" type="password" name="password" placeholder="••••••••">
+                <label class="form__label" for="">password</label>
+            </div>
+
+            <div class="form__form-group">
+                <button class="form__btn" type="submit">Log In</button>
+            </div>
+
+            <input type="hidden" name="_csrf" value="<%=ss%>">
+        </form>
+
+        <div class="mono-label" style="text-align:center; margin-top: 1rem;">
+            <a href="/signup" class="btn btn--ghost">Sign up instead</a>
+        </div>
+    </div>
+</body>
+</html>

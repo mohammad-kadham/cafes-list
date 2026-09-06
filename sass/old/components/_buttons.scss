@@ -1,0 +1,15 @@
+@use '../abstracts/variables' as *;
+
+// Components - buttons
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  border-radius: $radius;
+  background: $primary-color;
+  color: #fff;
+  transition: $transition;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}

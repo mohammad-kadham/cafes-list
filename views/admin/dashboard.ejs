@@ -1,0 +1,47 @@
+<%- include('../partials/header',{user:user}) %>
+
+    <body>
+        <%-include('../partials/navigation')%>
+
+        <main>
+            <div class="dashboard">
+                <h1 class="dashboard__title">Pending Cafes</h1>
+                <p class="dashboard__subtitle">Review and approve new submissions before they go live.</p>
+
+                <% if (errorMsg) { %>
+                    <div class="form__error"><%=errorMsg%></div>
+                <% } %>
+
+                <% if (cafes.length > 0) { %>
+                    <div class="wrapper">
+                        <% cafes.forEach(cafe => { %>
+                            <div class="cafe">
+                                <img class="cafe__img" src="<%-cafe.imageUrl%>" alt="">
+
+                                <div class="cafe__info">
+                                    <h2 class="cafe__title"><%-cafe.title%></h2>
+                                    <p class="cafe__meta"><%-cafe.location%> &middot; <%-cafe.city%></p>
+                                    <p class="cafe__meta"><%-cafe.openingHours%></p>
+                                </div>
+
+                                <div class="cafe__actions">
+                                    <form action="/admin/cafe/<%-cafe.id%>" method="post">
+                                        <input type="hidden" name="_csrf" value="<%-ss%>">
+                                        <button class="cafe__approve" type="submit">Approve</button>
+                                    </form>
+                                    <form action="/admin/cafe/delete/<%-cafe.id%>" method="post">
+                                        <input type="hidden" name="_csrf" value="<%-ss%>">
+                                        <button class="cafe__reject" type="submit">Reject</button>
+                                    </form>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                <% } else { %>
+                    <div class="dashboard__empty">No cafes waiting for review.</div>
+                <% } %>
+            </div>
+        </main>
+    </body>
+
+    <%-include('../partials/footer')%>

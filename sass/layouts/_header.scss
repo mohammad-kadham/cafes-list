@@ -1,0 +1,62 @@
+@use '../abstracts/variables' as *;
+
+// Layouts — header
+.header {
+  background: $ink;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: $shadow-sm;
+
+  &__container {
+    width: min(92%, $container-width);
+    height: 4.5rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  &__logo {
+    width: 2.5rem;
+    fill: $paper-card;
+  }
+
+  &__brand {
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: $paper-card;
+    letter-spacing: -0.01em;
+  }
+
+  #city {
+    font-family: $font-mono;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: $ochre;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    a {
+      font-family: $font-mono;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: $paper-card;
+      opacity: 0.85;
+      transition: opacity $transition-fast;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}

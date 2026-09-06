@@ -1,0 +1,67 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.user {
+  position: relative; // anchors the dropdown menu below it
+
+  &__toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    @include focus-ring;
+  }
+
+  &__logo {
+    fill: $paper-card;
+    width: 2rem;
+  }
+
+  &__menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background: $paper-card;
+    border: 1px solid $line;
+    border-radius: $radius;
+    box-shadow: $shadow-md;
+    list-style: none;
+    padding: 0.5rem 0;
+    min-width: 170px;
+    z-index: 10;
+
+    // hidden by default
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity $transition-fast, transform $transition-fast;
+
+    li a {
+      display: block;
+      padding: 0.6rem 1.1rem;
+      color: $ink;
+      font-family: $font-body;
+      font-size: 0.92rem;
+
+      &:hover {
+        background: $paper-dark;
+      }
+    }
+
+    // shown when parent .user has the "is-open" class
+    .user.is-open & {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .user__menu {
+    transition: none;
+  }
+}

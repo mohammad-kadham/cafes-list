@@ -1,0 +1,24 @@
+<%- include('../partials/header') %>
+
+
+    <body>
+        <%-include('../partials/navigation')%>
+
+      <div class="detail">
+    <img class="detail__img" src="<%=cafe.imageUrl%>" alt="">
+    <h1><%=cafe.title%></h1>
+    <p>Location: <%=cafe.location%></p>
+    <p>Opening Hours: <%=cafe.openingHours%></p>
+    <p>Over All Rating: <%=cafe.avgRating%></p>
+    <p>People Rated: <%=cafe.ratingCount%></p>
+<p style="--val: <%=cafe.avgWifiSpeed%>">Wifi Speed: <%=cafe.avgWifiSpeed%></p>
+<p style="--val: <%=cafe.avgOutletCount%>">Power Outlets: <%=cafe.avgOutletCount%></p>
+<p style="--val: <%=cafe.avgSeatComfort%>">Seat Comfort: <%=cafe.avgSeatComfort%></p>
+<p style="--val: <%=cafe.avgService%>">Service: <%=cafe.avgService%></p>
+<p style="--val: <%=cafe.avgNoiseLevel%>">Noise Level: <%=cafe.avgNoiseLevel%></p>
+<p style="--val: <%=cafe.avgPrices%>">Price: <%=cafe.avgPrices%></p>
+</div>
+
+    </body>
+
+    <%-include('../partials/footer')%>

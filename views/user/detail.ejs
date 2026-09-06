@@ -1,0 +1,153 @@
+<%- include('../partials/header') %>
+
+    <body>
+        <%-include('../partials/navigation')%>
+
+        <div class="page">
+            <a href="/" class="back">&larr; Back to list</a>
+
+            <div class="detail">
+                <div class="detail__img-frame">
+                    <img class="detail__img" src="<%=cafe.imageUrl%>" alt="<%=cafe.title%>">
+                </div>
+
+                <div>
+                    <h1><%=cafe.title%></h1>
+                    <p class="detail__meta"><b>Location:</b> <%=cafe.location%></p>
+                    <p class="detail__meta"><b>Opening Hours:</b> <%=cafe.openingHours%></p>
+
+                    <div class="hero-foot">
+                        <div class="stamp">
+                            <div class="stamp-text">Cafeslist<b>Approved</b>listing</div>
+                        </div>
+                        <div>
+                            <div class="score-block">
+                                <span class="score-num"><%=cafe.avgRating%></span>
+                                <span class="score-of">/ 5 overall</span>
+                            </div>
+                            <div class="score-count"><%=cafe.ratingCount%> people rated</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><span>The workability wheel</span></div>
+
+            <section class="wheel-section">
+                <div class="wheel-copy">
+                    <h2>Rated for getting things done</h2>
+                    <p>Six dimensions that matter when a cafe doubles as your office — plotted from every visitor's rating.</p>
+                </div>
+                <div class="wheel-wrap">
+                    <svg id="wheel" viewBox="0 0 280 280"
+                        data-wifi="<%=cafe.avgWifiSpeed%>"
+                        data-outlets="<%=cafe.avgOutletCount%>"
+                        data-seats="<%=cafe.avgSeatComfort%>"
+                        data-service="<%=cafe.avgService%>"
+                        data-noise="<%=cafe.avgNoiseLevel%>"
+                        data-price="<%=cafe.avgPrices%>">
+                    </svg>
+                </div>
+            </section>
+
+            <div class="receipt" id="receipt"></div>
+        </div>
+    </body>
+
+    <script>
+    (function(){
+        const svg = document.getElementById('wheel');
+        const labels = {
+            wifi: "Wifi speed",
+            outlets: "Power outlets",
+            seats: "Seat comfort",
+            service: "Service",
+            noise: "Noise level",
+            price: "Price"
+        };
+        const metrics = {};
+        Object.keys(labels).forEach(key => {
+            metrics[key] = parseFloat(svg.dataset[key]) || 0;
+        });
+
+        function pointAt(index, r, n, cx, cy) {
+            const angle = (-90 + index * (360 / n)) * (Math.PI / 180);
+            return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
+        }
+
+        function drawWheel() {
+            const NS = "http://www.w3.org/2000/svg";
+            const cx = 140, cy = 140, R = 90, max = 5;
+            const keys = Object.keys(metrics);
+            const n = keys.length;
+
+            for (let level = 1; level <= max; level++) {
+                const r = (level / max) * R;
+                const pts = keys.map((_, i) => { const p = pointAt(i, r, n, cx, cy); return `${p.x},${p.y}`; }).join(' ');
+                const poly = document.createElementNS(NS, 'polygon');
+                poly.setAttribute('points', pts);
+                poly.setAttribute('class', 'wheel-grid');
+                svg.appendChild(poly);
+            }
+
+            keys.forEach((key, i) => {
+                const outer = pointAt(i, R, n, cx, cy);
+                const line = document.createElementNS(NS, 'line');
+                line.setAttribute('x1', cx); line.setAttribute('y1', cy);
+                line.setAttribute('x2', outer.x); line.setAttribute('y2', outer.y);
+                line.setAttribute('class', 'wheel-axis');
+                svg.appendChild(line);
+
+                const labelPt = pointAt(i, R + 20, n, cx, cy);
+                const text = document.createElementNS(NS, 'text');
+                text.setAttribute('x', labelPt.x);
+                text.setAttribute('y', labelPt.y);
+                text.setAttribute('class', 'wheel-label');
+                text.setAttribute('text-anchor', 'middle');
+                text.setAttribute('dominant-baseline', 'middle');
+                text.textContent = labels[key];
+                svg.appendChild(text);
+            });
+
+            const dataPts = keys.map((key, i) => {
+                const r = (metrics[key] / max) * R;
+                return pointAt(i, r, n, cx, cy);
+            });
+            const shape = document.createElementNS(NS, 'polygon');
+            shape.setAttribute('points', dataPts.map(p => `${p.x},${p.y}`).join(' '));
+            shape.setAttribute('class', 'wheel-shape');
+            svg.appendChild(shape);
+
+            dataPts.forEach(p => {
+                const dot = document.createElementNS(NS, 'circle');
+                dot.setAttribute('cx', p.x); dot.setAttribute('cy', p.y); dot.setAttribute('r', 3.5);
+                dot.setAttribute('class', 'wheel-dot');
+                svg.appendChild(dot);
+            });
+
+            const overall = (Object.values(metrics).reduce((a, b) => a + b, 0) / n).toFixed(1);
+            const num = document.createElementNS(NS, 'text');
+            num.setAttribute('x', cx); num.setAttribute('y', cy + 6);
+            num.setAttribute('text-anchor', 'middle');
+            num.setAttribute('class', 'wheel-center-num');
+            num.textContent = overall;
+            svg.appendChild(num);
+        }
+
+        function drawReceipt() {
+            const el = document.getElementById('receipt');
+            el.innerHTML = Object.keys(metrics).map(key => `
+                <div class="receipt-row">
+                    <span class="receipt-label">${labels[key]}</span>
+                    <span class="receipt-leader"></span>
+                    <span class="receipt-val">${metrics[key].toFixed(1)} / 5</span>
+                </div>
+            `).join('');
+        }
+
+        drawWheel();
+        drawReceipt();
+    })();
+    </script>
+
+    <%-include('../partials/footer')%>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/signup" method="post">
+        <%if(err){%>
+            <h1><%=err%></h1>
+            <%}%>
+        <%if(errorMsg){%>
+            <h1><%=errorMsg%></h1>
+            <%}%>
+        <input type="text" name="username" value="<%-oldValues.username%>">
+        <label for="">name</label>
+        <hr>
+        <input type="text" name="email"  value="<%-oldValues.email%>">
+        <label for="">email</label>
+        <hr>
+        <input type="text" name="password"  value="<%-oldValues.password%>">
+        <label for="">password</label>
+        <hr>
+        <input type="text" name="confirmPassword"  value="<%-oldValues.confirmPassword%>">
+        <label for="">confirm Password</label>
+        <input type="hidden" name="_csrf" value="<%-ss%>">
+        <button type="submit">signup</button>
+    </form>
+</body>
+</html>
+

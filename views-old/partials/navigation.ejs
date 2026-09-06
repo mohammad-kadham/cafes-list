@@ -1,0 +1,45 @@
+ 
+ 
+ <header class="header">
+        <div class="header__container">
+           <h1 id="city"><%= city %></h1>
+           <script>
+            const city = "<%=city%>";
+           </script>
+            <div>
+                <%if(!isAuthentacted){%>
+                    <div><a href="/login" class="btn">Log In</a></div>
+
+                    <%}else{%>
+
+                        <div>
+                            <a href="/">
+
+                                <img class="header__logo" src="/assets/logo.png" alt="logo image">
+                            </a>
+                        </div>
+                        <%}%>
+            </div>
+
+            <%if(isAuthentacted){%>
+
+                <div class="user ">
+                    <button class="user__toggle " aria-label="open menu">
+                        <svg class="user__logo">
+                            <use xlink:href="/assets/sprite.svg#icon-user"></use>
+                        </svg>
+
+                    </button>
+                    <ul class="user__menu ">
+                        <!-- <li><a href="/profile">Profile</a></li> -->
+                        <li><a href="/cafes/add">Add Cafe</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </div>
+                <%}else{%>
+                    <div>
+                        <img class="header__logo" src="/assets/logo.png" alt="logo image">
+                    </div>
+                    <%}%>
+        </div>
+    </header>

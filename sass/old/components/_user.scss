@@ -1,0 +1,55 @@
+.user {
+    position: relative; // anchors the dropdown menu below it
+
+    &__toggle {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    &__logo {
+        fill: aliceblue;
+        width: 2rem;
+    }
+
+    &__menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: -3.5rem;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        list-style: none;
+        padding: 0.5rem 0;
+        min-width: 160px;
+z-index: 10;
+        // hidden by default
+        opacity: 0;
+        transform: translateY(-8px);
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+
+        li a {
+            display: block;
+            padding: 0.6rem 1rem;
+            color: #222;
+            text-decoration: none;
+            font-size: 0.95rem;
+
+            &:hover {
+                background: #f2f2f2;
+            }
+        }
+
+        // shown when parent .user has the "open" class
+        .user.is-open & {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+    }
+}

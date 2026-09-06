@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Sign Up</title>
+</head>
+<body>
+    <div class="form-page">
+        <form class="form" action="/signup" method="post">
+            <h1 class="form__title">Sign Up</h1>
+
+            <% if (err) { %>
+                <div class="form__error"><%=err%></div>
+            <% } %>
+            <% if (errorMsg) { %>
+                <div class="form__error"><%=errorMsg%></div>
+            <% } %>
+
+            <div class="form__form-group">
+                <input class="form__input" type="text" name="username" value="<%-oldValues.username%>" placeholder="Jane Doe">
+                <label class="form__label" for="">name</label>
+            </div>
+
+            <div class="form__form-group">
+                <input class="form__input" type="text" name="email" value="<%-oldValues.email%>" placeholder="you@example.com">
+                <label class="form__label" for="">email</label>
+            </div>
+
+            <div class="form__form-group">
+                <input class="form__input" type="password" name="password" placeholder="••••••••">
+                <label class="form__label" for="">password</label>
+            </div>
+
+            <div class="form__form-group">
+                <input class="form__input" type="password" name="confirmPassword" placeholder="••••••••">
+                <label class="form__label" for="">confirm password</label>
+            </div>
+
+            <input type="hidden" name="_csrf" value="<%-ss%>">
+
+            <div class="form__form-group">
+                <button class="form__btn" type="submit">Sign Up</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<%- include('../partials/header') %>
+
+    <body>
+        <%-include('../partials/navigation')%>
+
+        <main>
+            <form class="sort-form" method="GET" action="/cafes/filter">
+                <label>Highest rated cafe with:
+                    <select name="sort">
+                        <option <% if (sortQuery==='avgWifiSpeed' ) { %>selected<% } %> value="avgWifiSpeed">best wifi speed</option>
+                        <option <% if (sortQuery==='avgOutletCount' ) { %>selected<% } %> value="avgOutletCount">high power outlets count</option>
+                        <option <% if (sortQuery==='avgSeatComfort' ) { %>selected<% } %> value="avgSeatComfort">best seats</option>
+                        <option <% if (sortQuery==='avgService' ) { %>selected<% } %> value="avgService">best service</option>
+                        <option <% if (sortQuery==='avgNoiseLevel' ) { %>selected<% } %> value="avgNoiseLevel">lowest noise level</option>
+                        <option <% if (sortQuery==='avgPrices' ) { %>selected<% } %> value="avgPrices">cheap prices</option>
+                    </select>
+                </label>
+                <button class="btn" type="submit">Apply Filters</button>
+            </form>
+
+            <div class="container">
+                <% if (cafes.length > 0) { %>
+                    <% cafes.forEach((cafe, index) => { %>
+                        <div class="card">
+                            <div class="card__img-frame">
+                                <img src="<%-cafe.imageUrl%>" alt="" class="card__img">
+                                <div class="card__badge"><%-cafe.avgRating%></div>
+                            </div>
+
+                            <div class="card__body">
+                                <h1 class="card__title"><%-cafe.title%></h1>
+                                <p class="card__location"><%-cafe.location%></p>
+                                <p class="card__city"><%-cafe.city%></p>
+
+                                <div class="card__meta-row">
+                                    <span><%-cafe.openingHours%></span>
+                                    <span><%-cafe.ratingCount%> ratings</span>
+                                </div>
+                            </div>
+
+                            <div class="card__overlay">
+                                <a href=<%-`/rate/${cafe.id}`%> class="btn btn--secondary">rate</a>
+                                <a href=<%-`/details/${cafe.id}`%> class="btn btn--ghost">detail</a>
+                                <p class="card__location">📍 <%-cafe.location%></p>
+                                <p class="card__city"><%-cafe.city%></p>
+                                <div class="rating-strip">
+                                    <progress class="rating-strip__bar" max="5" value="<%-cafe.avgRating%>"></progress>
+                                    <p class="card__city">overall rating <%-cafe.avgRating%></p>
+                                </div>
+                                <p class="card__city">people <%-cafe.ratingCount%></p>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <h1>no cafes in your selected city</h1>
+                <% } %>
+            </div>
+        </main>
+    </body>
+
+    <%-include('../partials/footer')%>

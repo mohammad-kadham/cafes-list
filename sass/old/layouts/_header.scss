@@ -1,0 +1,19 @@
+@use '../abstracts/variables' as *;
+
+// Layouts - header
+.header {
+  background: $dark-color;
+  padding: 1rem 0;
+
+  &__container {
+    width: min(90%, $container-width);
+    height: 5rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__logo{
+    width: 3rem;
+  }
+}
