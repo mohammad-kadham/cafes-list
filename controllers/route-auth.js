@@ -13,3 +13,10 @@ exports.onlyUser=(req,res,next)=>{
         res.render("errors/only-user")
     }
 }
+exports.onlyAdmin=(req,res,next)=>{
+ if(req.user && req.user.isAdmin){
+        next()
+    }else{
+        res.render("errors/only-admin")
+    }
+}

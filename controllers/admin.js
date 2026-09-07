@@ -13,7 +13,7 @@ exports.postLoginAdmin = async (req, res, next) => {
     try {
         const user = Users.findUser(email);
         if (!user || !user.isAdmin) {
-            req.flash("errorMsg", "invalid email");
+            req.flash("errorMsg", "invalid email or not admin");
             return res.redirect("/admin");
         }
 

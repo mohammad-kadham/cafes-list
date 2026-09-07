@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/admin",adminController.getAdminLogin)
 router.post("/admin",adminController.postLoginAdmin)
 
-router.get("/dashboard",routeAuth.auth,adminController.getDashBoard)
+router.get("/dashboard",routeAuth.onlyAdmin,adminController.getDashBoard)
 
 router.post("/admin/cafe/:cafeId",adminController.approveCafe)
 router.post("/admin/cafe/delete/:cafeId",adminController.deleteCafe)

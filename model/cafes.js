@@ -60,6 +60,8 @@ module.exports = class Cafes {
     }
     static fetchAll(city) {
         //THIS WILL BRING CAFES BASED ON AVG RATING
+       
+        
         const allCafes = db.prepare("SELECT * FROM cafes WHERE approve =1 AND city =? ORDER BY avgRating DESC").all(city);
         return allCafes
 
@@ -67,17 +69,17 @@ module.exports = class Cafes {
     static approveCafe(id) {
         db.prepare("UPDATE cafes SET approve =1 WHERE id=?").run(id)
     }
-    static sort(sort) {
+    static sort(sort,city) {
         const allowedColumns = [
             "avgWifiSpeed", "avgOutletCount", "avgSeatComfort",
             "avgService", "avgNoiseLevel", "avgPrices", "ratingCount"
         ];
 
         const sortColumn = allowedColumns.includes(sort) ? sort : "avgRating";
-
+ console.log("city: ",city);
         return db.prepare(
-            `SELECT * FROM cafes WHERE approve = 1 ORDER BY  ${sortColumn} DESC, avgRating DESC`
-        ).all();
+            `SELECT * FROM cafes WHERE approve = 1 AND city =? ORDER BY  ${sortColumn} DESC, avgRating DESC`
+        ).all(city);
     }
     static deleteCafe(id) {
         db.prepare("DELETE  FROM cafes WHERE id =?").run(id)

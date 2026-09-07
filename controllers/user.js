@@ -53,7 +53,7 @@ exports.getFiltered = (req, res) => {
     try {
         if (sortQuery) {
 
-            const cafes = Cafes.sort(sortQuery)
+            const cafes = Cafes.sort(sortQuery,req.session.city)
             return res.render("user/index", {
                 cafes: cafes,
                 sortQuery
