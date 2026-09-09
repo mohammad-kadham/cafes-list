@@ -641,6 +641,74 @@ p {
   border-radius: 4px;
 }
 
+.explainer {
+  width: min(92%, 1100px);
+  margin: 4rem auto;
+}
+.explainer__intro {
+  max-width: 640px;
+  margin-bottom: 2.5rem;
+}
+.explainer__intro h2 {
+  margin: 0.5rem 0 0.75rem;
+}
+.explainer__lede {
+  font-size: 1.05rem;
+  max-width: 56ch;
+}
+.explainer__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+@media (max-width: 860px) {
+  .explainer__grid {
+    grid-template-columns: 1fr;
+  }
+}
+.explainer__item {
+  background: #F5EEDC;
+  border: 1px solid rgba(38, 32, 26, 0.16);
+  border-radius: 8px;
+  padding: 1.8rem 1.6rem;
+}
+.explainer__item h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}
+.explainer__item p {
+  font-size: 0.92rem;
+  margin: 0;
+}
+.explainer__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #2F5D52;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-9deg);
+  color: #2F5D52;
+  mix-blend-mode: multiply;
+  opacity: 0.92;
+  position: relative;
+  flex: none;
+}
+.explainer__icon::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid #2F5D52;
+  border-radius: 50%;
+}
+.explainer__icon {
+  font-family: "IBM Plex Mono", "Courier New", monospace;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
 .error-page {
   background-color: #E7DCC3;
   height: 100vh;

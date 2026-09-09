@@ -4,6 +4,33 @@
         <%-include('../partials/navigation')%>
 
         <main>
+            <section class="explainer">
+    <div class="explainer__intro">
+        <p class="eyebrow">What is Cafeslist</p>
+        <h2>Not another coffee review site.</h2>
+        <p class="explainer__lede">Star ratings tell you if the coffee's good. They don't tell you if you can actually get work done there. So we built something that does.</p>
+    </div>
+
+    <div class="explainer__grid">
+        <div class="explainer__item">
+            <div class="explainer__icon">1</div>
+            <h3>Rated on what matters for work</h3>
+            <p>Wifi speed, outlet count, seat comfort, noise level, service, and price — six dimensions, not one vague star rating.</p>
+        </div>
+
+        <div class="explainer__item">
+            <div class="explainer__icon">2</div>
+            <h3>Rated by people who stayed</h3>
+            <p>Every score comes from someone who actually sat down and worked — not a drive-by review of the espresso.</p>
+        </div>
+
+        <div class="explainer__item">
+            <div class="explainer__icon">3</div>
+            <h3>Checked before it's listed</h3>
+            <p>New cafes go through a quick approval step before they show up, so the list stays real, not spammy.</p>
+        </div>
+    </div>
+</section>
             <form class="sort-form" method="GET" action="/cafes/filter">
                 <label>Highest rated cafe with:
                     <select name="sort">
