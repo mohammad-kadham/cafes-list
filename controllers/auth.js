@@ -5,7 +5,11 @@ const bcrypt = require("bcrypt")
 const { sendWelcomeEmail } = require("../utls/email")
 
 exports.getLogin = (req, res) => {
-    res.render("auth/login", { err: req.flash("errorMsg") })
+       let errorArr = req.flash("errorMsg");
+   if(errorArr.length === 0){
+errorArr =null;
+   }
+    res.render("auth/login", { err: errorArr })
 }
 
 exports.postLogin = (req, res) => {
@@ -54,7 +58,12 @@ exports.postLogin = (req, res) => {
 
 
 exports.getSignup = (req, res) => {
-    res.render("auth/user", { err: null, oldValues: {}, errorMsg: req.flash("errorMsg") })
+   let errorArr = req.flash("errorMsg");
+   if(errorArr.length === 0){
+errorArr =null;
+   }
+    
+    res.render("auth/user", { err: null, oldValues: {}, errorMsg: errorArr })
 }
 
 
