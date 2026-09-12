@@ -25,7 +25,11 @@ exports.postLogin = (req, res) => {
         const user = Users.findUser(req.body.email)
         if (!user) {
             req.flash("errorMsg", "user email is not found")
-            res.redirect("/login")
+            return res.redirect("/login")
+        }
+        if (!user.isVerified) {
+            req.flash("errorMsg", "Please verify your email before logging in")
+            return res.redirect("/login")
         }
         return bcrypt.compare(req.body.password, user.password).then(doMatch => {
             if (doMatch) {

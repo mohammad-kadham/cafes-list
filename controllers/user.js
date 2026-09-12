@@ -47,7 +47,7 @@ exports.postAdd = (req, res) => {
     res.redirect("/")
 }
 
-exports.getFiltered = (req, res) => {
+exports.getFiltered = (req, res, next) => {
     const sortQuery = req.query.sort;
 
     try {
@@ -76,6 +76,9 @@ exports.getRate = (req, res) => {
         if(cafeId){
 
             const fetchedCafe = Cafes.fetchById(cafeId)
+            if (!fetchedCafe) {
+                return res.redirect("/");
+            }
            return res.render("user/rate", {
                 cafe: fetchedCafe
             })
@@ -96,7 +99,11 @@ exports.postRate = (req, res) => {
     }
 
     const userId = req.session.user.id;
-    const cafeId = req.body.cafe_id;
+    const cafeId = Number(req.body.cafe_id);
+    if (!Cafes.fetchById(cafeId)) {
+        req.flash("errorMsg", "Cafe not found");
+        return res.redirect("/");
+    }
     const wifiSpeed = req.body.wifi;
     const seatComfort = req.body.seat;
     const service = req.body.service;
@@ -110,8 +117,11 @@ exports.postRate = (req, res) => {
 }
 
 exports.getDetail = (req, res) => {
-    const cafeId = req.params.cafeId;
+    const cafeId = Number(req.params.cafeId);
     const cafe = Cafes.fetchById(cafeId)
+    if (!cafe) {
+        return res.redirect("/");
+    }
     
     res.render("user/detail", { cafe, user: req.session.user, isAuthentacted: req.session.user.isLogin })
 }

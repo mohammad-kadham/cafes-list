@@ -49,10 +49,7 @@ module.exports = class Cafes {
     }
     static fetchById(id) {
         const cafe = db.prepare("SELECT * FROM cafes WHERE id=?").get(id);
-        if (!cafe) {
-            return res.status(404).send("Cafe not found");
-        }
-        return cafe
+        return cafe;
     }
     static fetchSubmitCafes() {
         const cafes = db.prepare("SELECT * FROM cafes WHERE approve =0").all()

@@ -10,8 +10,8 @@ router.post("/admin",adminController.postLoginAdmin)
 
 router.get("/dashboard",routeAuth.onlyAdmin,adminController.getDashBoard)
 
-router.post("/admin/cafe/:cafeId",adminController.approveCafe)
-router.post("/admin/cafe/delete/:cafeId",adminController.deleteCafe)
+router.post("/admin/cafe/:cafeId", routeAuth.onlyAdmin, adminController.approveCafe)
+router.post("/admin/cafe/delete/:cafeId", routeAuth.onlyAdmin, adminController.deleteCafe)
 
 
 module.exports = router;

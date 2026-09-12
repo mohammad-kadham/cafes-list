@@ -32,12 +32,18 @@ if(file.mimetype === "image/jpg" || file.mimetype === "image/jpeg" || file.mimet
 }
 
 const csurfProtection = surf()
+const sessionSecret = process.env.SESSION_SECRET;
+
+if (!sessionSecret) {
+    throw new Error("SESSION_SECRET must be configured in the environment");
+}
+
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(session({ store: new store({ db: "session.db", dir: "./data", table: "sessions" }), saveUninitialized: false, resave: false, secret: "mysecret" }))
+app.use(session({ store: new store({ db: "session.db", dir: "./data", table: "sessions" }), saveUninitialized: false, resave: false, secret: sessionSecret }))
 app.use(multer({storage:storeImg,fileFilter:fileFilter}).single("image"))
 
 app.use(csurfProtection)
